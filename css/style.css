@@ -1,0 +1,40 @@
+body {
+  width: 100%;
+  background-image:url('../img/wavegrid.png');
+}
+
+#main_container {
+	margin: 10px auto;
+	width: 800px;
+}
+
+.heading {
+  text-align: center;
+  font-family: 'Finger Paint', cursive;
+  font-size: 50px;
+}
+
+table {
+  margin: 0px auto;
+}
+
+.box_cell {
+	border: 1px solid black;
+	width: 150px;
+	height: 150px;
+  border-radius: 75px;
+  opacity: .75;
+  box-shadow: 2px 2px 0px #888888
+}
+
+.hover {
+  background-color: #aaa;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
