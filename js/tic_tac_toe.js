@@ -11,7 +11,7 @@ var winningPlayer = 0;
 // Keep track of whose turn it is
 var turn = {
 	number : 0,
-	current_player_color : function() {
+	currentPlayerColor : function() {
 		if (this.number % 2 === 0) {
 			return 1;
 		}
@@ -19,13 +19,13 @@ var turn = {
 			return 2;
 		}
 	},
-	change_turn : function(){
+	changeTurn : function(){
 		this.number += 1;
 	}
 };
 
 // Check to see if any of the rows has 3 in a row
-function check_rows() {
+function checkRows() {
 	for (i = 0; i < board.length; i++) {
 		var same = true;
 		for (j = 0; j < board[i].length; j++) {
@@ -40,7 +40,7 @@ function check_rows() {
 }
 
 // Check to see if any of the columns has 3 in a row
-function check_cols() {
+function checkCols() {
 	for (i = 0; i < board.length; i++) {
 		var same = true;
 		for (j = 0; j < board[i].length; j++) {
@@ -55,7 +55,7 @@ function check_cols() {
 }
 
 // Check to see if any of the diagonals has 3 in a row
-function check_diag() {
+function checkDiag() {
 	var same = true;
 	for (i = 0; i < board.length; i++) {
 		if (board[i][i] === 0 || board[i][i] !== board[0][0]) {
@@ -77,10 +77,10 @@ function check_diag() {
 }
 
 // Check to see if it's a tie
-function check_tie() {
-	var flattened_board = Array.prototype.concat.apply([], board);
-	for(i = 0; i < flattened_board.length; i++){
-		if(flattened_board[i] === 0){
+function checkTie() {
+	var flattenedBoard = Array.prototype.concat.apply([], board);
+	for(i = 0; i < flattenedBoard.length; i++){
+		if(flattenedBoard[i] === 0){
 			console.log(i);
 			return false;
 		}
@@ -89,39 +89,39 @@ function check_tie() {
 }
 
 // Check to see if either player has won
-function check_winner() {
-	if (check_rows() === true || check_cols() === true || check_diag() === true) {
-		winningPlayer = turn.current_player_color();
+function checkWinner() {
+	if (checkRows() === true || checkCols() === true || checkDiag() === true) {
+		winningPlayer = turn.currentPlayerColor();
 		// Alert winner
-		end_game("Player " + winningPlayer + ", you win!");
+		endGame("Player " + winningPlayer + ", you win!");
 	}
-	else if (check_tie() === true) {
-		end_game("It's a tie...");
+	else if (checkTie() === true) {
+		endGame("It's a tie...");
 	}
 	else {
-		turn.change_turn();
+		turn.changeTurn();
 	}
 }
 
 // End the game, alert the winner and refresh the page
-function end_game(message) {
+function endGame(message) {
 	alert(message);
 	location.reload();
 }
 
 // Check the value of a cell
-function check_cell(cell) {
+function checkCell(cell) {
 	var row = $(cell).data("row");
 	var col = $(cell).data("col");
 	return(board[row][col]);
 }
 
-function change_cell(cell) {
+function changeCell(cell) {
 	// Change cell to the player color
 	var row = $(cell).data("row");
 	var col = $(cell).data("col");
-	board[row][col] = turn.current_player_color();
-	if (turn.current_player_color() == 1){
+	board[row][col] = turn.currentPlayerColor();
+	if (turn.currentPlayerColor() == 1){
 		// Remove hover class immediately once clicked
 		$(".box_cell").click(function () {
 			$(this).removeClass("hover");
@@ -144,11 +144,11 @@ $(document).ready(function(){
 	// Take the appropriate action when a box is clicked
 	$('.box_cell').click(function(){
 		// Check if cell is 0 on the board
-		if (check_cell(this) === 0 && winningPlayer === 0) {
+		if (checkCell(this) === 0 && winningPlayer === 0) {
 			// Change color if it's 0
-			change_cell(this);
+			changeCell(this);
 			// Check if we have a winner
-			check_winner();
+			checkWinner();
 		}
 	});
 });
