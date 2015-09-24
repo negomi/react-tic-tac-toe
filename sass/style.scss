@@ -1,0 +1,34 @@
+body {
+  background-color: purple;
+}
+
+.heading {
+  text-align: center;
+  font-size: 50px;
+}
+
+.grid {
+  margin: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cell {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  opacity: .75;
+  background-color: #aaa;
+  box-shadow: 2px 2px 0px #888888
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
