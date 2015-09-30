@@ -121,14 +121,18 @@ describe('TicTacToe component', () => {
       let { board } = component.board;
       component.setState({player: 1});
       component.aiMove();
-      let placed = board.reduce((a, b) => { return a.concat(b); }).some((el) => { return el === 1; });
-      expect(placed).to.be.true;
+      setTimeout(() => {
+        let placed = board.reduce((a, b) => { return a.concat(b); }).some((el) => { return el === 1; });
+        expect(placed).to.be.true;
+      }, 300);
     });
 
     it('should switch player', () => {
       component.setState({player: 1});
       component.aiMove();
-      expect(component.state.player).to.equal(2);
+      setTimeout(() => {
+        expect(component.state.player).to.equal(2);
+      }, 300);
     });
   });
 

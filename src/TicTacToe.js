@@ -8,11 +8,7 @@ class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
     this.board = new Board(props.width);
-    this.state = {
-      player: 1,
-      freezeBoard: false,
-      winner: false
-    };
+    this.state = {player: 1, freezeBoard: false, winner: false};
   }
 
   nextPlayer() {
@@ -37,10 +33,7 @@ class TicTacToe extends React.Component {
     if (cellEmpty) {
       this.move(x, y, this.state.player, () => {
         if (this.props.singlePlayer) {
-          this.setState({
-            player: this.nextPlayer(),
-            freezeBoard: true
-          }, this.aiMove);
+          this.setState({player: this.nextPlayer(), freezeBoard: true}, this.aiMove);
         } else {
           this.setState({player: this.nextPlayer()});
         }
@@ -52,15 +45,14 @@ class TicTacToe extends React.Component {
     // Trigger AI
     let x = Math.floor(Math.random() * 3);
     let y = Math.floor(Math.random() * 3);
-    this.move(x, y, this.state.player, () => {
-      this.setState({
-        player: this.nextPlayer(),
-        freezeBoard: false
+    setTimeout(() => {
+      this.move(x, y, this.state.player, () => {
+        this.setState({player: this.nextPlayer(), freezeBoard: false});
       });
-    });
+    }, 200);
   }
 
-  componentDidMount() {
+  aiInit() {
     if (this.props.singlePlayer) {
       let aiPlayer = Math.floor(Math.random() * 2) + 1;
       if (aiPlayer === 1) {
@@ -69,12 +61,27 @@ class TicTacToe extends React.Component {
     }
   }
 
+  reset() {
+    this.board = new Board(this.props.width);
+    this.setState({player: 1, freezeBoard: false, winner: false});
+    this.aiInit();
+  }
+
+  componentDidMount() {
+    this.aiInit();
+  }
+
   render() {
     let { board } = this.board;
-    let winnerOverlay;
+    let announcement;
 
     if (this.state.winner) {
-      winnerOverlay = <div className="winner-overlay">Player { this.state.winner } wins!</div>;
+      announcement = (
+        <div className="announcement">
+          <p>Player { this.state.winner } wins!</p>
+          <button onClick={ this.reset.bind(this) }>Reset</button>
+        </div>
+      );
     }
 
     let grid = board.map((row, rowInd) => {
@@ -85,7 +92,7 @@ class TicTacToe extends React.Component {
 
         if (!this.state.freezeBoard) { clickHandler = this.playerMove.bind(this); }
 
-        return <div className={ classString } key={ cellInd } onClick={ clickHandler } data-cell={ coords }>{classString}</div>;
+        return <div className={ classString } key={ cellInd } onClick={ clickHandler } data-cell={ coords }></div>;
       });
 
       return <div className="row" key={ rowInd }>{ cells }</div>;
@@ -93,8 +100,8 @@ class TicTacToe extends React.Component {
 
     return (
       <div className="grid">
-        { winnerOverlay }
         { grid }
+        { announcement }
       </div>
     );
   }

@@ -1,18 +1,9 @@
-body {
-  background-color: purple;
-}
-
-.heading {
-  text-align: center;
-  font-size: 50px;
-}
-
 .grid {
-  margin: auto;
-  width: 50%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 .cell {
@@ -22,15 +13,52 @@ body {
   border-radius: 75px;
   opacity: .75;
   background-color: #aaa;
-  box-shadow: 2px 2px 0px #888888
+  box-shadow: 2px 2px 0px #888888;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .cell-p1 {
   @extend .cell;
   background-color: white;
+  cursor: default;
 }
 
 .cell-p2 {
   @extend .cell;
   background-color: black;
+  cursor: default;
+}
+
+.announcement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 20%;
+  right: 20%;
+
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  transition: all 0.2s;
+
+  button {
+    height: 50px;
+    width: 100px;
+
+    font-size: 0.5em;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: purple;
+  }
 }
