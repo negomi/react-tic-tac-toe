@@ -29,12 +29,16 @@ describe('TicTacToe component', () => {
       assert.isArray(component.board.board);
     });
 
-    it('should pick the first player at random', () => {
-      expect(component.state.player).to.be.within(1, 2);
+    it('should be player 1\'s turn', () => {
+      expect(component.state.player).to.equal(1);
     });
 
     it('should not be frozen initially', () => {
       expect(component.state.freezeBoard).to.be.false;
+    });
+
+    it('should not have a winner initially', () => {
+      expect(component.state.winner).to.be.false;
     });
 
     it('should contain a grid', () => {
@@ -77,25 +81,22 @@ describe('TicTacToe component', () => {
     });
   });
 
-  describe('switchPlayer', () => {
+  describe('nextPlayer', () => {
 
-    it('should toggle between players', () => {
+    it('should return the next player', () => {
       component.setState({player: 1});
-      component.switchPlayer();
-      expect(component.state.player).to.equal(2);
-      component.switchPlayer();
-      expect(component.state.player).to.equal(1);
+      expect(component.nextPlayer()).to.equal(2);
     });
   });
 
-  describe('handleMove', () => {
+  describe('playerMove', () => {
 
     let mockEvent = {target: {dataset: {cell: '0_0'}}};
 
-    it('should populate an empty cell on the board', () => {
+    it('should populate an empty cell on the board when passed a click event', () => {
       let { board } = component.board;
       component.setState({player: 1});
-      component.handleMove(mockEvent);
+      component.playerMove(mockEvent);
       expect(board[0][0]).to.equal(1);
     });
 
@@ -103,14 +104,53 @@ describe('TicTacToe component', () => {
       let { board } = component.board;
       component.setState({player: 1});
       board[0][0] = 2;
-      component.handleMove(mockEvent);
+      component.playerMove(mockEvent);
       expect(board[0][0]).to.equal(2);
     });
 
     it('should switch player', () => {
       component.setState({player: 1});
-      component.handleMove(mockEvent);
+      component.playerMove(mockEvent);
       expect(component.state.player).to.equal(2);
+    });
+  });
+
+  describe('aiMove', () => {
+
+    it('should populate an empty cell on the board', () => {
+      let { board } = component.board;
+      component.setState({player: 1});
+      component.aiMove();
+      let placed = board.reduce((a, b) => { return a.concat(b); }).some((el) => { return el === 1; });
+      expect(placed).to.be.true;
+    });
+
+    it('should switch player', () => {
+      component.setState({player: 1});
+      component.aiMove();
+      expect(component.state.player).to.equal(2);
+    });
+  });
+
+  describe('move', () => {
+
+    it('should populate a cell on the board', () => {
+      let { board } = component.board;
+      component.move(0, 0, 1, () => {});
+      expect(board[0][0]).to.equal(1);
+    });
+
+    it('should set winner and freeze the board if there is a winner', () => {
+      component.board.board = [[1, 2, 1], [2, 1, 1], [0, 2, 2]];
+      component.move(2, 0, 1, () => {});
+      expect(component.state.winner).to.equal(1);
+      expect(component.state.freezeBoard).to.be.true;
+    });
+
+    it('should call the callback if no winner', () => {
+      let called = false;
+      component.move(2, 0, 1, () => { called = true; });
+      expect(called).to.be.true;
     });
   });
 });

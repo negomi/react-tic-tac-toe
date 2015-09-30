@@ -69,7 +69,9 @@ describe('Board service', () => {
       expect(boardInstance.checkWin()).to.equal(1);
       boardInstance.board = [[1, 2, 0], [0, 1, 0], [0, 0, 1]];
       expect(boardInstance.checkWin()).to.equal(1);
-      boardInstance.board = [[1, 2, 1], [2, 1, 2], [1, 2, 2]];
+      boardInstance.board = [[0, 2, 1], [0, 1, 0], [1, 0, 0]];
+      expect(boardInstance.checkWin()).to.equal(1);
+      boardInstance.board = [[1, 2, 1], [2, 1, 2], [2, 1, 2]];
       expect(boardInstance.checkWin()).to.equal(3);
     });
   });

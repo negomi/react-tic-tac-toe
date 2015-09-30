@@ -84,9 +84,7 @@ class Board {
     let diags = { left: [], right: [] };
     for (let i = 0; i < boardWidth; i++) {
       diags.left.push(this.getCell(i, i));
-    }
-    for (let i = boardWidth - 1; i >= 0; i--) {
-      diags.right.push(this.getCell(i, i));
+      diags.right.push(this.getCell(boardWidth - i - 1, i));
     }
 
     for (let key in diags) {
