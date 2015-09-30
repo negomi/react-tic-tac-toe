@@ -1,2 +1,2 @@
-import './specs/board.spec.js';
-import './specs/score.spec.js';
+import './specs/Board.spec.js';
+import './specs/TicTacToe.spec.js';

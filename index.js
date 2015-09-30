@@ -5,4 +5,4 @@ import './sass/style.scss';
 
 'use strict';
 
-ReactDOM.render(<TicTacToe xAxis={ 3 } yAxis={ 3 } />, document.getElementById('app'));
+ReactDOM.render(<TicTacToe width={ 3 } />, document.getElementById('app'));

@@ -25,10 +25,12 @@ body {
   box-shadow: 2px 2px 0px #888888
 }
 
-.red {
-  background-color: red;
+.cell-p1 {
+  @extend .cell;
+  background-color: white;
 }
 
-.blue {
-  background-color: blue;
+.cell-p2 {
+  @extend .cell;
+  background-color: black;
 }
