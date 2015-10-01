@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './Board';
+import ai from './ai';
 
 'use strict';
 
@@ -43,8 +44,8 @@ class TicTacToe extends React.Component {
 
   aiMove() {
     // Trigger AI
-    let x = Math.floor(Math.random() * 3);
-    let y = Math.floor(Math.random() * 3);
+    let [ x, y ] = ai.move(this.board, this.state.player);
+
     setTimeout(() => {
       this.move(x, y, this.state.player, () => {
         this.setState({player: this.nextPlayer(), freezeBoard: false});
