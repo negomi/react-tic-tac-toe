@@ -30,7 +30,7 @@ describe('Board service', () => {
 
   describe('getDim', () => {
 
-    it('should return the board width', function () {
+    it('should return the board width', () => {
       const boardInstance = new Board(4);
       expect(boardInstance.getDim()).to.equal(4);
     });
