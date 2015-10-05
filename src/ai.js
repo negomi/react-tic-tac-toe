@@ -2,8 +2,6 @@ import Board from './Board';
 
 let ai = {
   numTrials: 1000,
-  scoreCurrent: 2,
-  scoreOther: 1,
 
   // Play a game starting with the given player by making
   // random moves, alternating between players.
@@ -20,24 +18,26 @@ let ai = {
 
   // Score the completed board and update the scores grid.
   updateScores(player) {
-    let winner = this.trialBoard.checkWin();
+    const winner = this.trialBoard.checkWin();
+    const scorePlayer = 2;
+    const scoreOther = 1;
 
     if (winner < 3) {
-      let other = winner === 1 ? 2 : 1;
+      const other = winner === 1 ? 2 : 1;
 
       this.scores.forEach((row, rowInd) => {
         row.forEach((cell, cellInd) => {
           if (this.trialBoard.getCell(rowInd, cellInd) === player) {
             if (player === winner) {
-              this.scores[rowInd][cellInd] += this.scoreCurrent;
+              this.scores[rowInd][cellInd] += scorePlayer;
             } else {
-              this.scores[rowInd][cellInd] -= this.scoreCurrent;
+              this.scores[rowInd][cellInd] -= scorePlayer;
             }
           } else if (this.trialBoard.getCell(rowInd, cellInd) === other) {
             if (player === winner) {
-              this.scores[rowInd][cellInd] -= this.scoreOther;
+              this.scores[rowInd][cellInd] -= scoreOther;
             } else {
-              this.scores[rowInd][cellInd] += this.scoreOther;
+              this.scores[rowInd][cellInd] += scoreOther;
             }
           }
         });
@@ -49,9 +49,8 @@ let ai = {
   // and randomly return one of them.
   getBestMove(board) {
     let result;
-    let emptyCells = board.getEmptyCells();
 
-    let highScores = emptyCells.map(([ x, y ]) => {
+    const highScores = board.getEmptyCells().map(([ x, y ]) => {
       return {cell: [x, y], score: this.scores[x][y]};
     }).sort((a, b) => {
       return a.score < b.score;

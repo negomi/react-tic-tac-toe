@@ -62,7 +62,7 @@ class Board {
   // Returns player number, 3 in the case of a tie, or false if no winner.
   checkWin() {
     let winner = false;
-    let boardWidth = this.getDim();
+    const boardWidth = this.getDim();
 
     // Check rows.
     for (let rowInd = 0; rowInd < boardWidth; rowInd++) {

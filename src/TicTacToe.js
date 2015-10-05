@@ -19,10 +19,10 @@ class TicTacToe extends React.Component {
   // Place a move on the board and check for a winner.
   move(x, y, player, callback) {
     this.board.move(x, y, player);
+    const winner = this.board.checkWin();
 
-    let winner = this.board.checkWin();
     if (winner) {
-      this.setState({winner: winner, freezeBoard: true});
+      this.setState({winner, freezeBoard: true});
     } else {
       callback();
     }
@@ -30,8 +30,8 @@ class TicTacToe extends React.Component {
 
   // Handle a player's move, and switch to the next player.
   playerMove(event) {
-    let [ x, y ] = event.target.dataset.cell.split('_');
-    let cellEmpty = this.board.getCell(x, y) === 0;
+    const [ x, y ] = event.target.dataset.cell.split('_');
+    const cellEmpty = this.board.getCell(x, y) === 0;
 
     if (cellEmpty) {
       this.move(x, y, this.state.player, () => {
@@ -46,7 +46,7 @@ class TicTacToe extends React.Component {
 
   // Make an AI move, with a small delay for a more natural response time.
   aiMove() {
-    let [ x, y ] = ai.move(this.board, this.state.player);
+    const [ x, y ] = ai.move(this.board, this.state.player);
 
     setTimeout(() => {
       this.move(x, y, this.state.player, () => {
@@ -59,7 +59,7 @@ class TicTacToe extends React.Component {
   // and make the first move if appropriate.
   aiInit() {
     if (this.props.singlePlayer) {
-      let aiPlayer = Math.floor(Math.random() * 2) + 1;
+      const aiPlayer = Math.floor(Math.random() * 2) + 1;
       if (aiPlayer === 1) {
         this.aiMove();
       }
@@ -77,11 +77,11 @@ class TicTacToe extends React.Component {
   }
 
   render() {
-    let { board } = this.board;
+    const { board } = this.board;
     let announcement;
 
     if (this.state.winner) {
-      let msg = this.state.winner > 2 ? 'It\'s a tie!' : `Player ${this.state.winner} wins!`;
+      const msg = this.state.winner > 2 ? 'It\'s a tie!' : `Player ${this.state.winner} wins!`;
       announcement = (
         <div className="announcement">
           <p>{ msg }</p>
@@ -90,10 +90,10 @@ class TicTacToe extends React.Component {
       );
     }
 
-    let grid = board.map((row, rowInd) => {
-      let cells = row.map((cell, cellInd) => {
-        let classString = cell > 0 ? cell === 1 ? 'cell-p1' : 'cell-p2' : 'cell';
-        let coords = `${rowInd}_${cellInd}`;
+    const grid = board.map((row, rowInd) => {
+      const cells = row.map((cell, cellInd) => {
+        const classString = cell > 0 ? cell === 1 ? 'cell-p1' : 'cell-p2' : 'cell';
+        const coords = `${rowInd}_${cellInd}`;
         let clickHandler;
 
         if (!this.state.freezeBoard) { clickHandler = this.playerMove.bind(this); }
