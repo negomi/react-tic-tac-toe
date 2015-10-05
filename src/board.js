@@ -21,6 +21,7 @@ class Board {
     }
   }
 
+  // Return the board width.
   getDim() {
     return this.board.length;
   }

@@ -16,6 +16,7 @@ class TicTacToe extends React.Component {
     return this.state.player === 1 ? 2 : 1;
   }
 
+  // Place a move on the board and check for a winner.
   move(x, y, player, callback) {
     this.board.move(x, y, player);
 
@@ -27,8 +28,9 @@ class TicTacToe extends React.Component {
     }
   }
 
+  // Handle a player's move, and switch to the next player.
   playerMove(event) {
-    let [x, y] = event.target.dataset.cell.split('_');
+    let [ x, y ] = event.target.dataset.cell.split('_');
     let cellEmpty = this.board.getCell(x, y) === 0;
 
     if (cellEmpty) {
@@ -42,8 +44,8 @@ class TicTacToe extends React.Component {
     }
   }
 
+  // Make an AI move, with a small delay for a more natural response time.
   aiMove() {
-    // Trigger AI
     let [ x, y ] = ai.move(this.board, this.state.player);
 
     setTimeout(() => {
@@ -53,6 +55,8 @@ class TicTacToe extends React.Component {
     }, 200);
   }
 
+  // Determine which player will be the AI in single player mode,
+  // and make the first move if appropriate.
   aiInit() {
     if (this.props.singlePlayer) {
       let aiPlayer = Math.floor(Math.random() * 2) + 1;
