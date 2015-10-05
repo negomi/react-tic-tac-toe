@@ -77,9 +77,10 @@ class TicTacToe extends React.Component {
     let announcement;
 
     if (this.state.winner) {
+      let msg = this.state.winner > 2 ? 'It\'s a tie!' : `Player ${this.state.winner} wins!`;
       announcement = (
         <div className="announcement">
-          <p>Player { this.state.winner } wins!</p>
+          <p>{ msg }</p>
           <button onClick={ this.reset.bind(this) }>Reset</button>
         </div>
       );

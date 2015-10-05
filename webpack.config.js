@@ -14,8 +14,7 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.scss$/, loader: 'style!css!postcss!sass' },
-      { test: /\.css$/, loader: 'style!css!postcss' },
-      // { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
+      { test: /\.css$/, loader: 'style!css!postcss' }
     ]
   },
   resolve: {

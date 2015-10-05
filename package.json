@@ -1,23 +1,22 @@
 {
   "name": "tic-tac-toe",
   "version": "1.0.0",
-  "description": "Tic Tac Toe for one or two players written in JavaScript",
-  "main": "index.js",
+  "description": "A React implementation of Tic Tac Toe",
+  "main": "dist/bundle.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --hot --content-base public/",
     "build": "webpack --progress --colors",
     "test": "find ./ -name '*.spec.js' | xargs mocha -R min -r babel/register",
     "tdd": "webpack-dev-server --config test/webpack.test.config.js",
-    "deploy": ""
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/negomi/tic-tac-toe.git"
   },
   "keywords": [
-    "tic-tac-toe",
-    "2-player",
-    "single-player"
+    "tic tac toe",
+    "react-component"
   ],
   "author": "Imogen Wentworth",
   "license": "MIT",
@@ -26,6 +25,7 @@
   },
   "homepage": "http://negomi.github.io/tic-tac-toe/",
   "dependencies": {
+    "normalize.css": "^3.0.3",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1"
   },
@@ -44,6 +44,7 @@
     "mocha-loader": "^0.7.1",
     "node-sass": "^3.3.3",
     "postcss-loader": "^0.6.0",
+    "react-addons-test-utils": "^0.14.0-rc1",
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.6",
