@@ -1,78 +1,92 @@
 import Board from './Board';
 
 let ai = {
-  numTrials: 50,
+  numTrials: 1000,
   scoreCurrent: 2,
   scoreOther: 1,
 
+  // Play a game starting with the given player by making
+  // random moves, alternating between players.
   trial(player) {
-    let emptyCells = this.testBoard.getEmptyCells();
+    let emptyCells = this.trialBoard.getEmptyCells();
 
-    while (this.testBoard.checkWin() === false) {
+    while (this.trialBoard.checkWin() === false) {
       let [ x, y ] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-      this.testBoard.move(x, y, player);
-      emptyCells = this.testBoard.getEmptyCells();
+      this.trialBoard.move(x, y, player);
+      emptyCells = this.trialBoard.getEmptyCells();
       player = player === 1 ? 2 : 1;
     }
   },
 
+  // Score the completed board and update the scores grid.
   updateScores(player) {
-    let winner = this.testBoard.checkWin();
+    let winner = this.trialBoard.checkWin();
 
     if (winner < 3) {
       let other = winner === 1 ? 2 : 1;
 
-      if (player === winner) {
-        this.scores.forEach((row, rowInd) => {
-          row.forEach((cell, cellInd) => {
-            if (this.testBoard.getCell(rowInd, cellInd) === player) {
+      this.scores.forEach((row, rowInd) => {
+        row.forEach((cell, cellInd) => {
+          if (this.trialBoard.getCell(rowInd, cellInd) === player) {
+            if (player === winner) {
               this.scores[rowInd][cellInd] += this.scoreCurrent;
-            } else if (this.testBoard.getCell(rowInd, cellInd) === other) {
-              this.scores[rowInd][cellInd] += -this.scoreOther;
+            } else {
+              this.scores[rowInd][cellInd] -= this.scoreCurrent;
             }
-          });
-        });
-      } else {
-        this.scores.forEach((row, rowInd) => {
-          row.forEach((cell, cellInd) => {
-            if (this.testBoard.getCell(rowInd, cellInd) === player) {
-              this.scores[rowInd][cellInd] += -this.scoreCurrent;
-            } else if (this.testBoard.getCell(rowInd, cellInd) === other) {
+          } else if (this.trialBoard.getCell(rowInd, cellInd) === other) {
+            if (player === winner) {
+              this.scores[rowInd][cellInd] -= this.scoreOther;
+            } else {
               this.scores[rowInd][cellInd] += this.scoreOther;
             }
-          });
+          }
         });
-      }
+      });
     }
   },
 
+  // Find all empty cells with the maximum score
+  // and randomly return one of them.
   getBestMove(board) {
+    let result;
     let emptyCells = board.getEmptyCells();
 
-    let emptyCellScores = emptyCells.map(([ x, y ]) => {
+    let highScores = emptyCells.map(([ x, y ]) => {
       return {cell: [x, y], score: this.scores[x][y]};
+    }).sort((a, b) => {
+      return a.score < b.score;
+    }).filter((cell, i, arr) => {
+      return cell.score === arr[0].score;
     });
 
-    console.log(emptyCellScores);
+    if (highScores.length === 1) {
+      result = highScores[0].cell;
+    } else {
+      result = highScores[Math.floor(Math.random() * highScores.length)].cell;
+    }
+
+    return result;
   },
 
-  cloneBoard(original) {
+  // Return a copy of the current state of a given board.
+  clone(original) {
     let clone = new Board(original.getDim());
-    clone.board = original.board;
+    clone.board = original.board.map((row) => { return row.slice(); });
     return clone;
   },
 
-  move(board, player) {
-    this.scores = new Board(board.getDim()).board;
+  // Use a Monte Carlo simulation to return a move
+  // for the AI player.
+  move(currentBoard, player) {
+    this.scores = new Board(currentBoard.getDim()).board;
 
     for (var i = 0; i < this.numTrials; i++) {
-      this.testBoard = this.cloneBoard(board);
+      this.trialBoard = this.clone(currentBoard);
       this.trial(player);
       this.updateScores(player);
     }
 
-    // return this.getBestMove(board);
-    return [ 0, 0 ];
+    return this.getBestMove(currentBoard);
   }
 };
 
