@@ -83,4 +83,12 @@ describe('Board service', () => {
       expect(boardInstance.checkWin()).to.equal(3);
     });
   });
+
+  describe('allEqual', () => {
+
+    it('should check if all array elements are equal', () => {
+      expect(Board.allEqual([3, 3, 3, 3])).to.be.true;
+      expect(Board.allEqual([4, 3, 4])).to.be.false;
+    });
+  });
 });
