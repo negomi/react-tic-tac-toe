@@ -22,8 +22,8 @@ let ai = {
     const scorePlayer = 2;
     const scoreOther = 1;
 
-    if (winner < 3) {
-      const other = winner === 1 ? 2 : 1;
+    if (winner && winner < 3) {
+      const other = player === 1 ? 2 : 1;
 
       this.scores.forEach((row, rowInd) => {
         row.forEach((cell, cellInd) => {

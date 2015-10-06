@@ -1,4 +1,5 @@
 import TicTacToe from '../../src/TicTacToe';
+import ai from '../../src/ai';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -116,6 +117,14 @@ describe('TicTacToe component', () => {
   });
 
   describe('aiMove', () => {
+
+    before(() => {
+      ai.numTrials = 5;
+    });
+
+    after(() => {
+      ai.numTrials = 1000;
+    });
 
     it('should populate an empty cell on the board', () => {
       let { board } = component.board;
