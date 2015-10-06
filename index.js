@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TicTacToe from './src/TicTacToe';
+import TicTacToe from './lib/TicTacToe.js';
 import './node_modules/normalize.css/normalize.css';
 import './sass/style.scss';
 
