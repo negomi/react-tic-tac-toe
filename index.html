@@ -1,40 +1,26 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Tic Tac Toe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" width="device-width">
+  <link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
+  <title>Tic Tac Toe</title>
+  <style media="screen">
+    body {
+      background-color: purple;
+    }
 
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/tic_tac_toe.js"></script>
+    .heading {
+      text-align: center;
+      font-family: 'Finger Paint', sans-serif;
+      font-size: 50px;
+    }
+  </style>
 </head>
 <body>
-	<div id="main_container">
-		<h1 id="main_heading" class="heading" >Tic! Tac! Toe!</h1>
-		<table>
-			<tbody>
-				<tr class="box_row" >
-					<td id="box_0_0" class="box_cell" data-row="0" data-col="0"></td>
+  <h1 class="heading" >Tic! Tac! Toe!</h1>
+  <div id="app"></div>
 
-					<td id="box_0_1" class="box_cell" data-row="0" data-col="1"></td>
-
-					<td id="box_0_2" class="box_cell" data-row="0" data-col="2"></td>
-				</tr>
-				<tr class="box_row">
-					<td id="box_1_0" class="box_cell" data-row="1" data-col="0"></td>
-
-					<td id="box_1_1" class="box_cell" data-row="1" data-col="1"></td>
-
-					<td id="box_1_2" class="box_cell" data-row="1" data-col="2"></td>
-				</tr>
-				<tr class="box_row">
-					<td id="box_2_0" class="box_cell" data-row="2" data-col="0"></td>
-
-					<td id="box_2_1" class="box_cell" data-row="2" data-col="1"></td>
-
-					<td id="box_2_2" class="box_cell" data-row="2" data-col="2"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+  <script src="bundle.js"></script>
 </body>
 </html>
