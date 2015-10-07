@@ -20,16 +20,10 @@ Then open [`localhost:8080/webpack-dev-server/`](http://localhost:8080/webpack-d
 
 ## Tests
 
-To run the tests once, run:
+To run the tests with a watcher, run:
 
 ```
 npm test
-```
-
-To run them with a watcher, TDD style, run:
-
-```
-npm run tdd
 ```
 
 Then open [`localhost:8000/webpack-dev-server/test/`](http://localhost:8000/webpack-dev-server/test/) in a browser.

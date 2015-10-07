@@ -5,8 +5,7 @@
   "main": "lib/TicTacToe.js",
   "scripts": {
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base public/",
-    "test": "find ./ -name '*.spec.js' | xargs mocha -R min -r babel/register",
-    "tdd": "webpack-dev-server --config test/webpack.test.config.js",
+    "test": "webpack-dev-server --config test/webpack.test.config.js",
     "dist": "webpack --config webpack.production.config.js",
     "dist-min": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "lib": "babel ./src --out-dir ./lib",
