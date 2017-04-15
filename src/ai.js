@@ -1,4 +1,4 @@
-import Board from './Board';
+import Board from './board';
 
 let ai = {
   numTrials: 1000,

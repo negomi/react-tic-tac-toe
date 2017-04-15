@@ -1,4 +1,4 @@
-import Board from '../../src/Board';
+import Board from '../../src/board';
 import ai from '../../src/ai';
 import { assert, expect } from 'chai';
 

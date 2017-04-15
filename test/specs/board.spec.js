@@ -1,4 +1,4 @@
-import Board from '../../src/Board';
+import Board from '../../src/board';
 import { assert, expect } from 'chai';
 
 'use strict';
