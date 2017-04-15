@@ -48,7 +48,8 @@ if (TARGET === 'gh-pages') {
     new Clean(['demo']),
     new Html({
       template: './public/index.html',
-      inject: false
+      inject: false,
+      filename: 'index.html'
     })
   ]);
 }
