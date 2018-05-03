@@ -6,4 +6,5 @@ import './sass/style.scss';
 
 'use strict';
 
-ReactDOM.render(<TicTacToe width={ 3 } singlePlayer />, document.getElementById('app'));
+//ReactDOM.render(<TicTacToe width={3} singlePlayer />, document.getElementById('app'));
+ReactDOM.render(<TicTacToe width={3} />, document.getElementById('app'));
